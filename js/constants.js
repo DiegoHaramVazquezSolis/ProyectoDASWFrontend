@@ -1,2 +1,1 @@
-const API_TEST_URL = "http://localhost:3001";
-const API_URL = "http://localhost:3001";
+const API_URL = "https://dasw-api.herokuapp.com";

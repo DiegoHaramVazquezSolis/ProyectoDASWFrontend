@@ -1,5 +1,5 @@
 async function getAllCategoriesWithMovies() {
-    const categoriesResponse = await fetch(`${API_TEST_URL}/api/v1/categories`, { method: 'GET' });
+    const categoriesResponse = await fetch(`${API_URL}/api/v1/categories`, { method: 'GET' });
     if (categoriesResponse.status === 200) {
         const { categories } = await categoriesResponse.json();
 

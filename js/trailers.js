@@ -1,5 +1,5 @@
 async function getTrailer(movieId) {
-    const trailerResponse = await fetch(`${API_TEST_URL}/api/v1/movies/${movieId}`, { method: 'GET' });
+    const trailerResponse = await fetch(`${API_URL}/api/v1/movies/${movieId}`, { method: 'GET' });
     if (trailerResponse.status === 200) {
         const data = (await trailerResponse.json()).movie;
         const trailerUrl = data.trailer.replace('watch?v=', 'embed/')

@@ -14,7 +14,7 @@ function executeIfUserLogged(next) {
 async function signIn() {
     const email = document.getElementById('inputSignInEmail').value;
     const password = document.getElementById('inputSignInPassword').value;
-    const signInRequest = await fetch(`${API_TEST_URL}/api/v1/auth/signin`, {
+    const signInRequest = await fetch(`${API_URL}/api/v1/auth/signin`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -43,7 +43,7 @@ async function signUpUser() {
     const name = document.getElementById('inputSignUpName').value;
     const email = document.getElementById('inputSignUpEmail').value;
     const password = document.getElementById('inputSignUpPassword').value;
-    const signInRequest = await fetch(`${API_TEST_URL}/api/v1/auth/signup`, {
+    const signInRequest = await fetch(`${API_URL}/api/v1/auth/signup`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

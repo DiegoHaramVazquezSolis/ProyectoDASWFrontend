@@ -1,5 +1,5 @@
 async function getAndShowMovies() {
-    const moviesResponse = await fetch(`${API_TEST_URL}/api/v1/movies`, { method: 'GET' });
+    const moviesResponse = await fetch(`${API_URL}/api/v1/movies`, { method: 'GET' });
 
     if (moviesResponse.status === 200) {
         const moviesData = (await moviesResponse.json()).movies;
@@ -28,7 +28,7 @@ function renderMovies(movies) {
 
 async function removeMovie(movieId) {
     if (confirm('Estas seguro de querer eliminar esta pelicula?')) {
-        const deleteMovieResponse = await fetch(`${API_TEST_URL}/api/v1/movies/${movieId}`, {
+        const deleteMovieResponse = await fetch(`${API_URL}/api/v1/movies/${movieId}`, {
             method: 'DELETE',
             headers: {
                 'x-access-token': localStorage.getItem('userToken')
@@ -45,7 +45,7 @@ async function removeMovie(movieId) {
 }
 
 async function addMovie() {
-    const addMovieResponse = await fetch(`${API_TEST_URL}/api/v1/movies`, {
+    const addMovieResponse = await fetch(`${API_URL}/api/v1/movies`, {
         method: 'POST',
         headers: {
             'x-access-token': localStorage.getItem('userToken')
@@ -57,7 +57,7 @@ async function addMovie() {
 }
 
 async function editMovie(movieId) {
-    const editMovieResponse = await fetch(`${API_TEST_URL}/api/v1/movies/${movieId}`, {
+    const editMovieResponse = await fetch(`${API_URL}/api/v1/movies/${movieId}`, {
         method: 'PUT',
         headers: {
             'x-access-token': localStorage.getItem('userToken')
