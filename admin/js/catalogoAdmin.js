@@ -44,18 +44,6 @@ async function removeMovie(movieId) {
     }
 }
 
-async function addMovie() {
-    const addMovieResponse = await fetch(`${API_URL}/api/v1/movies`, {
-        method: 'POST',
-        headers: {
-            'x-access-token': localStorage.getItem('userToken')
-        },
-        body: JSON.stringify({
-
-        })
-    });
-}
-
 async function editMovie(movieId) {
     const editMovieResponse = await fetch(`${API_URL}/api/v1/movies/${movieId}`, {
         method: 'PUT',
