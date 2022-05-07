@@ -17,11 +17,6 @@ function renderNavbar() {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./cuenta.html">
-                        Cuenta
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="./admin/catalogo.html">
                         Manejar catalogo
                     </a>
@@ -40,18 +35,8 @@ function renderNavbar() {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./cuenta.html">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal">
                         Buscar
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./cuenta.html">
-                        Cuenta
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="./cuenta.html">
-                        Cuenta
                     </a>
                 </li>
                 <li class="nav-item">
