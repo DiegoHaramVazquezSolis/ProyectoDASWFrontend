@@ -89,7 +89,8 @@ async function saveMovie() {
     });
 
     if (addMovieResponse.status === 201) {
-        alert('Agregada correctamente')
+        alert('Agregada correctamente');
+        window.location.replace('../catalogo.html');
     } else {
         alert('No se pudo agregar, verifica los datos');
     }

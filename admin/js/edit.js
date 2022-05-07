@@ -117,7 +117,8 @@ async function editMovie() {
     });
 
     if (addMovieResponse.status === 200) {
-        alert('Actualizada correctamente')
+        alert('Actualizada correctamente');
+        window.location.replace('../catalogo.html');
     } else {
         alert('No se pudo actualizar, verifica los datos');
     }

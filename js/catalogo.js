@@ -1,20 +1,25 @@
-async function getAllCategoriesWithMovies() {
+async function getAllCategories() {
     const categoriesResponse = await fetch(`${API_URL}/api/v1/categories`, { method: 'GET' });
     if (categoriesResponse.status === 200) {
         const { categories } = await categoriesResponse.json();
 
         for (let i = 0; i < categories.length; i++) {
             const category = categories[i];
-            renderCategory(category, i);
+            const categoryMoviesResponse = await fetch(`${API_URL}/api/v1/movies/category/${category._id}`, { method: 'GET' });
+            if (categoryMoviesResponse.status === 200) {
+                const movies = (await categoryMoviesResponse.json()).movies;
+
+                renderCategory(category, movies, i);
+            }
         }
     }
 }
 
-function renderCategory(cat, index) {
+function renderCategory(cat, movies, index) {
     const catName = cat.name;
     const catId = cat.name.replace(/\s/g, "");
 
-    if (cat.movies.length) {
+    if (movies.length) {
         document.getElementById('categorysAccordion').innerHTML += `
             <div class="card" style="background-color: transparent;">
                 <div class="card-header" role="tab" id="${catId}">
@@ -35,7 +40,7 @@ function renderCategory(cat, index) {
             </div>
         `;
 
-        renderCategoryMovies(catId, cat.movies);
+        renderCategoryMovies(catId, movies);
     }
 }
 
@@ -46,7 +51,7 @@ function renderCategoryMovies(cat, movies) {
     }
 }
 
-getAllCategoriesWithMovies();
+getAllCategories();
 renderNavbar();
 renderSignInDialog();
 renderSignUpDialog();
