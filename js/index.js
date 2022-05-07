@@ -12,7 +12,7 @@ function renderNavbar() {
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./cuenta.html">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#searchModal">
                         Buscar
                     </a>
                 </li>
@@ -142,4 +142,32 @@ function renderSignUpDialog() {
             </div>
         </div>
     `;
+}
+
+async function findMovieByName() {
+    document.getElementById('searchResultsContainer').innerHTML = '';
+    const title = document.getElementById('searchMovieField').value;
+    if (title.length > 1) {
+        const resultsResponse = await fetch(`${API_URL}/api/v1/movies/${title}`, { method: 'POST' });
+
+        if (resultsResponse.status === 200) {
+            const results = (await resultsResponse.json()).movie;
+            if (results.length) {
+                for (let i = 0; i < results.length; i++) {
+                    const movie = results[i];
+                    document.getElementById('searchResultsContainer').innerHTML += `
+                        <li class="media">
+                            <img src="${movie.poster}" style="height: 128px; width: 100px;" class="mr-3" alt="${movie.title}">
+                            <div class="media-body">
+                                <h5 class="mt-0 mb-1">${movie.title}</h5>
+                                <p>
+                                    ${movie.description.substring(0, 327)}...
+                                </p>
+                            </div>
+                        </li>
+                    `;
+                }
+            }
+        }
+    }
 }
