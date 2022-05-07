@@ -129,6 +129,13 @@ function renderSignUpDialog() {
     `;
 }
 
+let timer;
+
+function findMoviesAfterXTime() {
+    clearTimeout(timer);
+    timer = setTimeout(findMovieByName, 500);
+}
+
 async function findMovieByName() {
     document.getElementById('searchResultsContainer').innerHTML = '';
     const title = document.getElementById('searchMovieField').value;
@@ -141,7 +148,7 @@ async function findMovieByName() {
                 for (let i = 0; i < results.length; i++) {
                     const movie = results[i];
                     document.getElementById('searchResultsContainer').innerHTML += `
-                        <li class="media">
+                        <li class="media" data-toggle="modal" data-target="#searchModal" onclick="getTrailer('${movie._id}')" style="cursor: pointer;">
                             <img src="${movie.poster}" style="height: 128px; width: 100px;" class="mr-3" alt="${movie.title}">
                             <div class="media-body">
                                 <h5 class="mt-0 mb-1">${movie.title}</h5>
