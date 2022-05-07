@@ -14,9 +14,9 @@ function renderMovies(movies) {
         document.getElementById(movie._id).innerHTML += `
             <div class="card-footer text-muted">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" class="btn btn-success">
+                    <a class="btn btn-success text-light" href='./movies/edit.html?id=${movie._id}'>
                         <i class="fa fa-pencil" aria-hidden="true"></i>
-                    </button>
+                    </a>
                     <button type="button" class="btn btn-danger" onclick="removeMovie('${movie._id}')">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </button>
@@ -42,18 +42,6 @@ async function removeMovie(movieId) {
 
         alert('No se pudo eliminar la pelicula');
     }
-}
-
-async function editMovie(movieId) {
-    const editMovieResponse = await fetch(`${API_URL}/api/v1/movies/${movieId}`, {
-        method: 'PUT',
-        headers: {
-            'x-access-token': localStorage.getItem('userToken')
-        },
-        body: JSON.stringify({
-            
-        })
-    });
 }
 
 getAndShowMovies();

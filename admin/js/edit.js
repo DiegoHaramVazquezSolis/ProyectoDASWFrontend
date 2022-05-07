@@ -1,3 +1,9 @@
+function getMovieId() {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    return searchParams.get('id');
+}
+
 async function loadCategories() {
     const categoriesResponse = await fetch(`${API_URL}/api/v1/categories`, { method: 'GET' });
 
@@ -54,7 +60,28 @@ async function loadStudios() {
     }
 }
 
-async function saveMovie() {
+async function loadMovieToEdit() {
+    await loadCategories();
+    await loadDirectors();
+    await loadActors();
+    await loadStudios();
+    const movieId = getMovieId();
+
+    const movieDataResponse = await fetch(`${API_URL}/api/v1/movies/${movieId}`, { method: 'GET' });
+
+    if (movieDataResponse.status === 200) {
+        const movieData = (await movieDataResponse.json()).movie;
+
+        Object.keys(movieData).forEach((movieField) => {
+            if (document.getElementById(movieField)) {
+                const value = Array.isArray(movieData[movieField]) ? (movieData[movieField][0]._id ? movieData[movieField][0]._id : movieData[movieField]) : ((typeof movieData[movieField] === 'string' || typeof movieData[movieField] === 'number') ? movieData[movieField] : movieData[movieField]._id);
+                document.getElementById(movieField).value = value.toString();
+            }
+        });
+    }
+}
+
+async function editMovie() {
     const title = document.getElementById('title').value;
     const year = document.getElementById('year').value;
     const duration = document.getElementById('duration').value;
@@ -66,8 +93,9 @@ async function saveMovie() {
     const studio = document.getElementById('studio').value;
     const poster = document.getElementById('poster').value;
     const trailer = document.getElementById('trailer').value;
-    const addMovieResponse = await fetch(`${API_URL}/api/v1/movies`, {
-        method: 'POST',
+
+    const addMovieResponse = await fetch(`${API_URL}/api/v1/movies/${getMovieId()}`, {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'x-access-token': localStorage.getItem('userToken')
@@ -88,14 +116,12 @@ async function saveMovie() {
         })
     });
 
-    if (addMovieResponse.status === 201) {
-        alert('Agregada correctamente')
+    if (addMovieResponse.status === 200) {
+        alert('Actualizada correctamente')
     } else {
-        alert('No se pudo agregar, verifica los datos');
+        alert('No se pudo actualizar, verifica los datos');
     }
 }
 
-loadCategories();
-loadDirectors();
-loadActors();
-loadStudios();
+loadMovieToEdit();
+console.log(localStorage.getItem('userToken'));
