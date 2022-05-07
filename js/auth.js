@@ -6,7 +6,7 @@ function executeIfUserLogged(next) {
     if (isUserLogged()) {
         next();
     } else {
-        console.log('Open modal');
+        console.log("req");
         $("#signInModal").modal('show');
     }
 }
