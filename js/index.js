@@ -137,29 +137,34 @@ function findMoviesAfterXTime() {
 }
 
 async function findMovieByName() {
-    document.getElementById('searchResultsContainer').innerHTML = '';
-    const title = document.getElementById('searchMovieField').value;
-    if (title.length > 1) {
-        const resultsResponse = await fetch(`${API_URL}/api/v1/movies/${title}`, { method: 'POST' });
+    document.getElementById('searchResultsContainer').innerHTML = generateSpinnerHTML();
+    setTimeout(async () => {
+        const title = document.getElementById('searchMovieField').value;
+        if (title.length > 1) {
+            const resultsResponse = await fetch(`${API_URL}/api/v1/movies/${title}`, { method: 'POST' });
 
-        if (resultsResponse.status === 200) {
-            const results = (await resultsResponse.json()).movie;
-            if (results.length) {
-                for (let i = 0; i < results.length; i++) {
-                    const movie = results[i];
-                    document.getElementById('searchResultsContainer').innerHTML += `
-                        <li class="media" data-toggle="modal" data-target="#searchModal" onclick="getTrailer('${movie._id}')" style="cursor: pointer;">
-                            <img src="${movie.poster}" style="height: 128px; width: 100px;" class="mr-3" alt="${movie.title}">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1">${movie.title}</h5>
-                                <p>
-                                    ${movie.description.substring(0, 327)}...
-                                </p>
-                            </div>
-                        </li>
-                    `;
+            if (resultsResponse.status === 200) {
+                const results = (await resultsResponse.json()).movie;
+                document.getElementById('searchResultsContainer').innerHTML = '';
+                if (results.length) {
+                    for (let i = 0; i < results.length; i++) {
+                        const movie = results[i];
+                        document.getElementById('searchResultsContainer').innerHTML += `
+                            <li class="media" data-toggle="modal" data-target="#searchModal" onclick="getTrailer('${movie._id}')" style="cursor: pointer;">
+                                <img src="${movie.poster}" style="height: 128px; width: 100px;" class="mr-3" alt="${movie.title}">
+                                <div class="media-body">
+                                    <h5 class="mt-0 mb-1">${movie.title}</h5>
+                                    <p>
+                                        ${movie.description.substring(0, 326)}...
+                                    </p>
+                                </div>
+                            </li>
+                        `;
+                    }
+                } else {
+                    document.getElementById('searchResultsContainer').innerHTML = 'No se encontraron resultados';
                 }
             }
         }
-    }
+    }, 500);
 }

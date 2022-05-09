@@ -1,23 +1,30 @@
 async function getAllCategories() {
-    const categoriesResponse = await fetch(`${API_URL}/api/v1/categories`, { method: 'GET' });
-    if (categoriesResponse.status === 200) {
-        const { categories } = await categoriesResponse.json();
+    document.getElementById('categorysAccordion').innerHTML = generateSpinnerHTML();
 
-        for (let i = 0; i < categories.length; i++) {
-            const category = categories[i];
-            const categoryMoviesResponse = await fetch(`${API_URL}/api/v1/movies/category/${category._id}`, { method: 'GET' });
-            if (categoryMoviesResponse.status === 200) {
-                const movies = (await categoryMoviesResponse.json()).movies;
+    setTimeout(async () => {
+        const categoriesResponse = await fetch(`${API_URL}/api/v1/categories`, { method: 'GET' });
+        if (categoriesResponse.status === 200) {
+            const { categories } = await categoriesResponse.json();
 
-                renderCategory(category, movies, i);
+            for (let i = 0; i < categories.length; i++) {
+                const category = categories[i];
+                const categoryMoviesResponse = await fetch(`${API_URL}/api/v1/movies/category/${category._id}`, { method: 'GET' });
+                if (categoryMoviesResponse.status === 200) {
+                    const movies = (await categoryMoviesResponse.json()).movies;
+
+                    renderCategory(category, movies, i);
+                }
             }
         }
-    }
+    }, 500);
 }
 
 function renderCategory(cat, movies, index) {
     const catName = cat.name;
     const catId = cat.name.replace(/\s/g, "");
+    if (index === 0) {
+        document.getElementById('categorysAccordion').innerHTML = '';
+    }
 
     if (movies.length) {
         document.getElementById('categorysAccordion').innerHTML += `

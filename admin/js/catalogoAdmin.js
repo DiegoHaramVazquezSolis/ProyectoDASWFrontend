@@ -1,13 +1,17 @@
 async function getAndShowMovies() {
-    const moviesResponse = await fetch(`${API_URL}/api/v1/movies`, { method: 'GET' });
+    document.getElementById('trailersList').innerHTML = generateSpinnerHTML();
+    setTimeout(async () => {
+        const moviesResponse = await fetch(`${API_URL}/api/v1/movies`, { method: 'GET' });
 
-    if (moviesResponse.status === 200) {
-        const moviesData = (await moviesResponse.json()).movies;
-        renderMovies(moviesData);
-    }
+        if (moviesResponse.status === 200) {
+            const moviesData = (await moviesResponse.json()).movies;
+            renderMovies(moviesData);
+        }
+    }, 500);
 }
 
 function renderMovies(movies) {
+    document.getElementById('trailersList').innerHTML = '';
     for (let i = 0; i < movies.length; i++) {
         const movie = movies[i];
         document.getElementById('trailersList').innerHTML += generateMovieCard(movie);
