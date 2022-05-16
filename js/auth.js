@@ -73,3 +73,8 @@ function signOut() {
     localStorage.removeItem('userToken');
     renderNavbar();
 }
+
+function signOutAdmin() {
+    localStorage.removeItem('userToken');
+    window.location.href = "../catalogo.html";
+}
