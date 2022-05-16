@@ -48,7 +48,7 @@
             </div>
         </nav>
         <div class="container">
-            <h2>Agregar actor</h2>
+            <h2>Agregar Director</h2>
             <div class="row">
                 <div class="col-sm-12 col-md-8 col-lg-6">
                     <div class="form-group">
@@ -64,6 +64,33 @@
                 </div>
             </div>
             <button type="button" class="btn btn-success btn-block float-right mt-3" onclick="addDirector()">
+                Guardar
+            </button>
+        </div>
+
+        <div class="container">
+            <h2>Editar director</h2>
+            <div class="row">
+                <div class="col-sm-12 col-md-8 col-lg-6">
+                    <div class="form-group">
+                        <label for="id_director">Director</label>
+                        <input type="text" name="id_director" id="id_director" class="form-control" placeholder="id del director" class="text-muted">
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-6">
+                    <div class="form-group">
+                        <label for="director_name">Director</label>
+                        <input type="text" name="director_name" id="director_name" class="form-control" placeholder="Nombre del director" class="text-muted">
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-6">
+                    <div class="form-group">
+                        <label for="director_age">Edad</label>
+                        <input type="number" name="director_age" id="director_age" class="form-control" placeholder="Edad del director" class="text-muted">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-block float-right mt-3" onclick="editDirector()">
                 Guardar
             </button>
         </div>
