@@ -56,6 +56,26 @@
                 Guardar
             </button>
         </div>
+        <div class="container">
+            <h2>Editar Estudio</h2>
+            <div class="row">
+                <div class="col-sm-12 col-md-8 col-lg-6">
+                    <div class="form-group">
+                        <label for="id_estudio">Estudio</label>
+                        <input type="text" name="id_estudio" id="id_estudio" class="form-control" placeholder="id del estudio" class="text-muted">
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-6">
+                    <div class="form-group">
+                        <label for="estudio_name">Estudio</label>
+                        <input type="text" name="estudio_name" id="estudio_name" class="form-control" placeholder="Nombre del estudio" class="text-muted">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-success btn-block float-right mt-3" onclick="editEstudio()">
+                Guardar
+            </button>
+        </div>
 
         <script src="./../js/constants.js"></script>
         <script src="./js/estudio.js"></script>
